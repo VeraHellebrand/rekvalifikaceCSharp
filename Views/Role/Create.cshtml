@@ -1,0 +1,23 @@
+﻿
+@model string
+
+@{
+    ViewData["Title"] = "CREATE ROLE";
+}
+
+<h1>Vytvoření skupiny uživatelů</h1>
+<a asp-action="Index" class="btn btn-secondary">Zpět</a>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="name"></label>
+        <input name="name" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Vytvoř</button>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

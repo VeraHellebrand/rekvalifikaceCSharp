@@ -1,0 +1,121 @@
+﻿@model IEnumerable<RekvalifikaceApp.ViewModels.SubjectViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Předměty</h1>
+ @if (User.Identity.IsAuthenticated && (User.IsInRole("SuperAdmin") || User.IsInRole("Admini") || User.IsInRole("Učitelé")))
+{
+    <a asp-action="Create">Nový předmět</a>
+}
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Název
+                </th>
+                <th>
+                    Učitel
+                </th>
+                <th class="d-none d-sm-table-cell">
+                    Má zkoušku
+                </th>
+                <th class="d-none d-sm-table-cell">
+                    Má projekt
+                </th>               
+                <th>
+                    Akce
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var subject in Model)
+            {
+                <tr>
+                    <td>
+                    @Html.DisplayFor(modelItem => subject.Name)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => subject.TeacherName)
+                    </td>
+                    <td class="d-none d-sm-table-cell">
+                    @if (subject.HasExam)
+                    {
+                        <svg class="bi text-success" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5.93 13.93l-4-4a.5.5 0 0 1 .707-.707L6 12.293l9.646-9.647a.5.5 0 0 1 .708.708l-10 10a.5.5 0 0 1-.707 0z"/>
+                        </svg>
+                    }
+                    </td>
+                    <td class="d-none d-sm-table-cell">
+                    @if (subject.HasProject)
+                    {
+                        <svg class="bi text-success" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M5.93 13.93l-4-4a.5.5 0 0 1 .707-.707L6 12.293l9.646-9.647a.5.5 0 0 1 .708.708l-10 10a.5.5 0 0 1-.707 0z"/>
+                        </svg>
+                    }
+                    </td>
+                    <td class="d-table-cell d-sm-none">
+                        <div class="btn-group " role="group" aria-label="Akce">                           
+                            <a class="btn btn-info" asp-action="Details" asp-route-id="@subject.Id">
+                                <svg bootstrap-icon="InfoCircle" class="bi" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M7.5 3.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 .5-.5z"/>
+                                    <path d="M8 10a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                    <path fill-rule="evenodd" d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm.5-4.5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 1 0v5z"/>
+                                </svg>
+                            </a>
+                            
+                            @if (User.Identity.IsAuthenticated && (User.IsInRole("SuperAdmin") || User.IsInRole("Admini") || User.IsInRole("Učitelé")))
+                            {
+                                <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@subject.Id">
+                                    <svg bootstrap-icon="Pencil" class="bi" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M12.646 1.646a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.708-.708l10-10a.5.5 0 0 1 .708 0z"/>
+                                        <path fill-rule="evenodd" d="M3 10.5v2h2l7-7-2-2-7 7z"/>
+                                    </svg>
+                                </a>
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@subject.Id">
+                                    <svg bootstrap-icon="Trash" class="bi" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M5.5 5.5a.5.5 0 0 1 1 0v6a.5.5 0 0 1-1 0v-6zm2-2a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0v-6zm4-2a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5zm-8-1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5zm9.414-.293A.5.5 0 0 1 13 3.5v9a.5.5 0 0 1-1 0v-9a.5.5 0 0 1 .086-.293l1-1z"/>
+                                    </svg>
+                                </a>
+                            }
+                        </div>
+                    </td>
+                    <td class="d-none d-sm-table-cell">
+                        <div class="btn-group" role="group" aria-label="Akce">
+                            
+                                <a class="btn btn-info" asp-action="Details" asp-route-id="@subject.Id">
+                                    <svg bootstrap-icon="InfoCircle" class="bi" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M7.5 3.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 .5-.5z"/>
+                                        <path d="M8 10a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                        <path fill-rule="evenodd" d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm.5-4.5a.5.5 0 0 1-1 0v-5a.5.5 0 0 1 1 0v5z"/>
+                                    </svg>
+                                    Více
+                                </a>
+                            
+                            @if (User.Identity.IsAuthenticated && (User.IsInRole("SuperAdmin") || User.IsInRole("Admini") || User.IsInRole("Učitelé")))
+                            {
+                                <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@subject.Id">
+                                    <svg bootstrap-icon="Pencil" class="bi" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M12.646 1.646a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.708-.708l10-10a.5.5 0 0 1 .708 0z"/>
+                                        <path fill-rule="evenodd" d="M3 10.5v2h2l7-7-2-2-7 7z"/>
+                                    </svg>
+                                    Edit
+                                </a>
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@subject.Id">
+                                    <svg bootstrap-icon="Trash" class="bi" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M5.5 5.5a.5.5 0 0 1 1 0v6a.5.5 0 0 1-1 0v-6zm2-2a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0v-6zm4-2a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5zm-8-1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5zm9.414-.293A.5.5 0 0 1 13 3.5v9a.5.5 0 0 1-1 0v-9a.5.5 0 0 1 .086-.293l1-1z"/>
+                                    </svg>
+                                    Smazat
+                                </a>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

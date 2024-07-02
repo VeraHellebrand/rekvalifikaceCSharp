@@ -1,0 +1,54 @@
+﻿@model RoleEdit
+@{
+    ViewData["Title"] = "UPDATE ROLE";
+}
+<h1 class="bg-secondary text-white">Editace skupiny uživatelů</h1>
+<a asp-action="Index" class="btn btn-secondary">Zpět</a>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="roleName" value="@Model.Role.Name" />
+    <input type="hidden" name="roleId" value="@Model.Role.Id" />
+
+    <h3 class="bg-success p-1 text-white">Přidat do @Model.Role.Name</h3>
+    <table class="table table-bordered table-sm">
+        @if (!Model.RoleNonMembers.Any())
+        {
+                <tr><td colspan="2">Všichni uživatelé jsou členy</td></tr>
+        }
+        else
+        {
+            @foreach (AppUser user in Model.RoleNonMembers)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>
+                        <input type="checkbox" name="AddIds" value="@user.Id">
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+
+    <h3 class="bg-danger p-1 text-white">Odebrat z @Model.Role.Name</h3>
+    <table class="table table-bordered table-sm">
+        @if (!Model.RoleMembers.Any())
+        {
+                <tr><td colspan="2">Žádní uživatelé nejsou členy</td></tr>
+        }
+        else
+        {
+            @foreach (AppUser user in Model.RoleMembers)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>
+                        <input type="checkbox" name="DeleteIds" value="@user.Id">
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+
+    <button type="submit" class="btn btn-primary">Uložit</button>
+</form>

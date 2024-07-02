@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Stránka nenalezena";
+    Layout = "_Layout";
+}
+
+<div class="container full-height-container text-center">
+    <h2>404 - Stránka nenalezena</h2>
+    <p class="lead">Je nám líto, ale stránka, kterou hledáte, neexistuje.</p>
+    <a class="btn btn-primary my-2" href="@Url.Action("Index", "Home")" role="button">Zpět na hlavní stránku</a>
+    <a class="btn btn-secondary" href="javascript:history.back()" role="button">Vrátit se zpět</a>
+    <img src="https://http.dog/404.jpg" alt="404 NotFound" class="img-fluid mt-4" />
+</div>

@@ -1,0 +1,40 @@
+﻿@using RekvalifikaceApp.Dtos
+@model SubjectDto;
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>@Html.DisplayFor(model => model.Name)</h1>
+
+<h3>Jste si jistý, že chcete smazat uživatele?</h3>
+<div>
+    <h4>Předmět</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HasExam)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HasExam)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HasProject)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HasProject)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Zpět na seznam</a>
+    </form>
+</div>

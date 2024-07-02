@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AppUser>
+
+@{
+    ViewData["Title"] = "Všichni uživatelé";
+}
+
+<h1>Uživatelé</h1>
+
+<a asp-action="Create" class="btn btn-primary my-3">Vytvoření uživatele</a>
+
+@if (!Model.Any())
+{
+        <p>Nejsou k dispozici žádní uživatelé.</p>
+}
+else
+{
+    <table class="table table-sm table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Jméno</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Úprava</th>
+                <th class="text-center">Smazání</th>
+                <th class="text-center">ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td class="text-center align-middle">
+                        <a class="btn btn-sm btn-secondary" asp-action="Edit" asp-route-id="@user.Id">
+                            <svg bootstrap-icon="Pencil" class="bi" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M12.646 1.646a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.708-.708l10-10a.5.5 0 0 1 .708 0z"/>
+                                <path fill-rule="evenodd" d="M3 10.5v2h2l7-7-2-2-7 7z"/>
+                            </svg>
+                        </a>
+                    </td>
+                    <td class="text-center align-middle">
+                        <form asp-action="Delete" asp-route-id="@user.Id" method="post" onsubmit="return confirm('Opravdu chcete smazat tohoto uživatele?');">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <svg bootstrap-icon="Trash" class="bi" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M5.5 5.5a.5.5 0 0 1 1 0v6a.5.5 0 0 1-1 0v-6zm2-2a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0v-6zm4-2a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5zm-8-1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5zm9.414-.293A.5.5 0 0 1 13 3.5v9a.5.5 0 0 1-1 0v-9a.5.5 0 0 1 .086-.293l1-1z"/>
+                                </svg>
+                            </button>
+                        </form>
+                    </td>
+                    <td>@user.Id</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

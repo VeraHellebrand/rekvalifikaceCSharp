@@ -1,0 +1,32 @@
+﻿@model string;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">HellDev rekvalifikace</h1>
+    <h2 class="my-5">Vítejte @ViewBag.UserName</h2>
+    @if (User?.Identity?.IsAuthenticated ?? false)
+    {
+        <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
+    }
+    else
+    {
+        <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Url.Action("Index", "Home")" class="btn btn-success">Login</a>
+    }
+    <p class="my-5">Pronikněte a objevte kouzlo světa IT</p>
+    <h3>
+        <img src="@Url.Content("~/assets/Icons/java.png")" alt="Java">
+        <img src="@Url.Content("~/assets/Icons/csharp.png")" alt="C#">
+        <img src="@Url.Content("~/assets/Icons/php.png")" alt="PHP">
+        <img src="@Url.Content("~/assets/Icons/html.png")" alt="HTML">
+        <img src="@Url.Content("~/assets/Icons/css.png")" alt="CSS">
+        <img src="@Url.Content("~/assets/Icons/js.png")" alt="JavaScript">
+        <img src="@Url.Content("~/assets/Icons/react.png")" alt="React">
+        <img src="@Url.Content("~/assets/Icons/bootstrap.png")" alt="Bootstrap">
+        <img src="@Url.Content("~/assets/Icons/mysql.png")" alt="MySQL">
+        <img src="@Url.Content("~/assets/Icons/oracle.png")" alt="Oracle">
+        <img src="@Url.Content("~/assets/Icons/github.png")" alt="GitHub">
+        <img src="@Url.Content("~/assets/Icons/teams.png")" alt="Microsoft Teams">
+    </h3>
+</div>

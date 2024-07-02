@@ -1,0 +1,46 @@
+﻿@using RekvalifikaceApp.ViewModels
+@model EditUserViewModel
+
+@{
+    ViewData["Title"] = "EDIT USER";
+}
+
+<h1>Editace uživatele</h1>
+<a asp-action="Index" class="btn btn-secondary">Zpět</a>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input  asp-for="Id" hidden/>
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control"/>
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <hr />
+
+    <h4>Změna hesla</h4>
+    <div class="form-group">
+        <label asp-for="Password">Nové heslo</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ConfirmPassword">Potvrdit nové heslo</label>
+        <input asp-for="ConfirmPassword" type="password" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Uložit změny</button>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

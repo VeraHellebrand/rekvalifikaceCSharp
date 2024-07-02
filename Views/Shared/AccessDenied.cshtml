@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Přístup zamítnut";
+    Layout = "_Layout";
+}
+
+<div class="container full-height-container text-center">
+    <h2>403 - Přístup zamítnut</h2>
+    <p class="lead">Je nám líto, ale pro vstup na stránku nemáte oprávnění.</p>
+    <a class="btn btn-primary my-2" href="@Url.Action("Index", "Home")" role="button">Zpět na hlavní stránku</a>
+    <a class="btn btn-secondary" href="javascript:history.back()" role="button">Vrátit se zpět</a>
+    <img src="https://http.dog/403.jpg" alt="404 NotFound" class="img-fluid mt-4" />
+</div>

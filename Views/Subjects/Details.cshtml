@@ -1,0 +1,52 @@
+﻿@model RekvalifikaceApp.ViewModels.SubjectViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Html.DisplayFor(model => model.Name)</h1>
+
+<div>
+    <h4>Předmět</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TeacherName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TeacherName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HasProjectText)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HasProjectText)
+        </dd>
+         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HasExamText)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HasExamText)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("SuperAdmin") || User.IsInRole("Admini") || User.IsInRole("Učitelé")))
+    {
+            <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> 
+    }
+    <a asp-action="Index">Zpět na seznam</a>
+</div>
